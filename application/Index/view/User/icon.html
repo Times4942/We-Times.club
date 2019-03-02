@@ -1,0 +1,131 @@
+<!doctype html>
+<html class="no-js fixed-layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>We-Times-个人中心</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="__STATIC__/AmazeUI/Cache-Control" content="no-siteapp" />
+    <link rel="alternate icon" type="image/png" href="__STATIC__/img/icon.png">
+    <link rel="apple-touch-icon-precomposed" href="__STATIC__/AmazeUI/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="__STATIC__/AmazeUI/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="__STATIC__/AmazeUI/assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+{include file="public/header"}
+<div style="top: -50px;" class="am-cf admin-main">
+    {include file="public/sidebar"}
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">头像管理</strong> / <small>Head portrait management</small></div>
+            </div>
+
+            <hr/>
+
+            <div class="am-g">
+
+                <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8" style="    left: 0%;">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-bd">
+                            <div class="am-g">
+                                <div class="am-u-md-4">
+                                    <img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
+                                </div>
+                                <div class="am-u-md-8">
+                                    <p>你可以使用<a href="#">gravatar.com</a>提供的头像或者使用本地上传头像。 </p>
+                                    <form class="am-form">
+                                        <div class="am-form-group">
+                                            <input type="file" id="user-pic">
+                                            <p class="am-form-help">请选择要上传的文件...</p>
+                                            <button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <button
+                style="display: none"
+                id="alert"
+                type="button"
+                class="am-btn am-btn-primary"
+                data-am-modal="{target: '#my-alert'}">
+            Alert
+        </button>
+        <div class="am-modal am-modal-alert" id="my-alert">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd">We-Times提示</div>
+                <div class="am-modal-bd">
+                    修改成功!
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn">确定</span>
+                </div>
+            </div>
+        </div>
+        <footer class="admin-content-footer">
+            <hr>
+            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </footer>
+
+    </div>
+    <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="__STATIC__/AmazeUI/assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__STATIC__/AmazeUI/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="__STATIC__/AmazeUI/assets/js/amazeui.min.js"></script>
+<script src="__STATIC__/AmazeUI/assets/js/app.js"></script>
+
+<script>
+    $(function() {
+        $('#doc-vld-msg').validator({
+            onValid: function(validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+
+            onInValid: function(validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                if (!$alert.length) {
+
+                }
+
+                $alert.html(msg).show();
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

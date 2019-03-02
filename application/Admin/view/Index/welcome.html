@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title>雪狐ThinkPHP5内容管理系统后台首页</title>
+
+    <link rel="shortcut icon" href="__STATIC__/Hplus/favicon.ico"> <link href="__STATIC__/Hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__STATIC__/Hplus/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg">
+<div class="row  border-bottom white-bg dashboard-header">
+
+    <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>本次登录信息</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <small class="stats-label">上次登录ip</small>
+                        <h4>192.168.1.1</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <small class="stats-label">上次登录时间</small>
+                        <h4>{$user->last_login_time|date="Y-m-d H:i:s",###}</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">月</span>
+                <h5>前台浏览量</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">386,200</h1>
+                <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i>
+                </div>
+                <small>总计浏览量</small>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-4">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>联系信息</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <p><i class="fa fa-send-o"></i> 网站：<a href="http://www.We-Times.club/" target="_blank">http://www.We-Times.club</a>
+                    </p>
+                    <p><i class="fa fa-qq"></i> QQ：<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=494243846&amp;site=qq&amp;menu=yes" target="_blank">494243846</a>
+                    </p>
+                    <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">.zh</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>更新日志</h5>
+                </div>
+                <div class="ibox-content no-padding">
+                    <div class="panel-body">
+                        <div class="panel-group" id="version">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v15">v3.0</a><code class="pull-right">2018.02</code>
+                                    </h5>
+                                </div>
+                                <div id="v15" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <ol>
+                                            <li>头发要掉光了</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v13">v2.0</a><code class="pull-right">2018.01</code>
+                                    </h5>
+                                </div>
+                                <div id="v13" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ol>
+                                            <li>完成小程序PC端开发</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v12">v1.0</a><code class="pull-right">2018.01</code>
+                                    </h4>
+                                </div>
+                                <div id="v12" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ol>
+                                            <li>完成小程序商城端开发</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="__STATIC__/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/Hplus/js/plugins/layer/layer.min.js"></script>
+<script src="__STATIC__/Hplus/js/content.min.js"></script>
+<script src="__STATIC__/Hplus/js/welcome.min.js"></script>
+</body>
+
+</html>

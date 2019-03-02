@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We-Times网站后台管理系统 - 注册</title>
+    <link rel="shortcut icon" href="__STATIC__/Hplus/favicon.ico"> <link href="__STATIC__/Hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div>
+        <div>
+
+            <h1 class="logo-name">We-Times</h1>
+
+        </div>
+        <h3>欢迎加入We-Times.club</h3>
+        <p>成为新管理员</p>
+        <form class="m-t" id="signupForm" action="{:url('User/Register')}" method="post">
+            <div id="div_code" class="form-group">
+                <input id="code" type="text" name="code" class="form-control" placeholder="请输入邀请码" onblur="Invitation()" >
+            </div>
+            <div id="div_adminname" class="form-group">
+                <input type="text" id="admin_name" name="admin_name" class="form-control" placeholder="请输入用户名" onblur="SearchAdmin()">
+            </div>
+            <div class="form-group">
+                <input type="text" id="email" name="email" class="form-control" placeholder="请输入邮箱" >
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码" >
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="请再次输入密码" >
+            </div>
+            <button id="btn_submit" type="submit" class="btn btn-primary block full-width m-b">注 册</button>
+
+            <p class="text-muted text-center"><small>已经有账户了？</small><a href="login.html">点此登录</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+<script src="__STATIC__/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/Hplus/js/content.min.js?v=1.0.0"></script>
+<script src="__STATIC__/Hplus/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__STATIC__/Hplus/js/plugins/validate/messages_zh.min.js"></script>
+<script src="__STATIC__/Hplus/js/demo/form-validate-demo.min.js"></script>
+<script>
+    function SearchAdmin() {
+        var adminname = $('#admin_name').val();
+        var url = "http://localhost/We-Times/public/api/queryuser/getAdminByAdminName?admin_name="+adminname;
+        $.ajax({
+            type : 'post',
+            url : url,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 1){
+                    alert("用户名已存在");
+                    document.getElementById("div_adminname").setAttribute("class","form-group has-error");
+
+                    $(document).ready(document.getElementById("btn_submit").disabled = true);
+                }
+                else{
+                    document.getElementById("div_adminname").setAttribute("class","form-group has-success");
+                    $(document).ready(document.getElementById("btn_submit").disabled = false);
+                }
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+
+    function Invitation() {
+        var code = $('#code').val();
+        var url =  "http://localhost/We-Times/public/api/Invitation/Search?code="+code;
+        $.ajax({
+            type : 'post',
+            url : url,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 0){
+                    alert("邀请码不存在");
+                    document.getElementById("div_code").setAttribute("class","form-group has-error");
+                    $(document).ready(document.getElementById("btn_submit").disabled = true);
+                }
+                else if(data.status == 2){
+                    alert("邀请码已被使用");
+                    document.getElementById("div_code").setAttribute("class","form-group has-error");
+                    $(document).ready(document.getElementById("btn_submit").disabled = true);
+                }
+                else {
+                    document.getElementById("div_code").setAttribute("class","form-group has-success");
+                    $(document).ready(document.getElementById("btn_submit").disabled = false);
+                }
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+</script>
+</body>
+
+</html>

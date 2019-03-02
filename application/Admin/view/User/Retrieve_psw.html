@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We-Times管理员 - 密码找回</title>
+    <link rel="shortcut icon" href="__STATIC__/Hplus/favicon.ico"> <link href="__STATIC__/Hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>找回密码 <small>邮件验证</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-6 b-r">
+                            <h3 class="m-t-none m-b">邮件发送</h3>
+                            <p>欢迎使用邮箱密码找回功能，我们将向您的注册邮箱中发送一封邮件，请您核对邮件中的验证码并填写到文本框中(⊙o⊙)</p>
+                            <form action="{:url('User/RetrievePsw')}" method="post" >
+                                <div id="div_username" class="form-group">
+                                    <label>请填写用户名</label>
+                                    <input id="username" type="text" name="username" placeholder="请输入您需要找回密码的用户名" class="form-control" onblur="SearchEmail()">
+                                </div>
+                                <div class="form-group">
+                                    <label>邮箱</label>
+                                    <input id="ShowEmail" type="email"  name="email" readonly unselectable="on"  placeholder="您的邮箱" class="form-control">
+
+                                </div>
+                                <div>
+                                    <button id="btn_submit" class="btn btn-sm btn-primary pull-right m-t-n-xs" style="width: 100px"  type="submit"><strong>发 送 邮 件</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>还不是管理员？</h4>
+                            <p>您可以注册一个新管理员账户，用以协助站长管理本站</p>
+                            <p class="text-center">
+                                <a href="{:url('User/Register')}"><i class="fa fa-sign-in big-icon"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+<script src="__STATIC__/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/Hplus/js/content.min.js?v=1.0.0"></script>
+<script>
+    $(document).ready(document.getElementById("btn_submit").disabled = true);
+
+    function SearchEmail() {
+        var username = $('#username').val();
+        var url = "http://localhost/We-Times/public/api/queryemail/getEmailByUserName?username="+username;
+        $.ajax({
+            type : 'post',
+            url : url,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 1){
+                    document.getElementById("ShowEmail").value = data.data;
+                    document.getElementById("div_username").setAttribute("class","form-group has-success");
+
+                    document.getElementById("btn_submit").disabled = false;
+                }
+                else{
+                    alert('用户名不存在,请检查您要找回的用户名或重新申请注册！');
+                    document.getElementById("div_username").setAttribute("class","form-group has-error");
+                    document.getElementById("ShowEmail").value = '请重新输入';
+                }
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+
+
+</script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</html>

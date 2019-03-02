@@ -1,0 +1,64 @@
+<div class="am-popup" id="my-popup" style=" background: #f8f8f8;">
+    <div class="am-popup-inner">
+        <div class="am-popup-hd">
+            <h4 class="am-popup-title">城市选择</h4>
+            <span data-am-modal-close
+                  class="am-close">&times;</span>
+        </div>
+
+        <form action="{:url('Index/Index')}" method="post">
+            <div class="am-popup-bd">
+                <label class="label" for="select"> 请选择省、直辖市、自治区:</label><br>
+                <select id="select" onchange="ShowCity()"  data-am-selected="{searchBox: 1}">
+                    <option value="0">请选择</option>
+                    {volist name="citys" id="vo"}
+                    <option value="{$vo.id}">{$vo.city_name}</option>
+                    {/volist}
+                </select>
+            </div>
+            <div class="am-popup-bd">
+                <label class="label" for="select"> 请选择城市:</label><br>
+                <div id="SecondCity">
+                    请选择上一级哟~
+                </div>
+
+            </div>
+            <!--<input type="submit" style="width: 35%;-->
+            <!--margin-left: 31.5%;" class="am-btn am-btn-primary" value="提 交" id="submit">-->
+
+
+        </form>
+    </div>
+</div>
+
+<script>
+    function ShowCity() {
+        var id = document.getElementById('select').value;
+        var url = "http://localhost/We-Times/public/api/City/SearchChildByStatus?parent_id="+id;
+        if(id != 0){
+            $.ajax({
+                type : 'post',
+                url : url,
+                dataType: 'json',
+                success : function(data){
+                    var str ='';
+                    for (var i =0; i<data.data.length; i++){
+                        str += "<button  style=\"margin-top: 20px;  margin-left: 10px;\" type=\"button\" onclick=\"SubmitCity("+data.data[i].id+")\"  class=\"am-btn am-btn-default am-btn-sm \">"+data.data[i].city_name+"</button>"
+                    }
+                    document.getElementById("SecondCity").innerHTML=str;
+                },
+                error: function (data) {
+
+                }
+            });
+        }
+        else{
+            document.getElementById("SecondCity").innerHTML="请选择上一级哟~";
+        }
+
+    }
+
+    function SubmitCity(id) {
+        window.location.href='{:url("Index/index")}?city_id='+id;
+    }
+</script>

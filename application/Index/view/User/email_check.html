@@ -1,0 +1,185 @@
+<!doctype html>
+<html class="no-js fixed-layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>We-Times-个人中心</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="__STATIC__/AmazeUI/Cache-Control" content="no-siteapp" />
+    <link rel="alternate icon" type="image/png" href="__STATIC__/img/icon.png">
+    <link rel="apple-touch-icon-precomposed" href="__STATIC__/AmazeUI/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="__STATIC__/AmazeUI/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="__STATIC__/AmazeUI/assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+{include file="public/header"}
+<div style="top: -50px;" class="am-cf admin-main">
+    {include file="public/sidebar"}
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">邮箱验证</strong> / <small>Mailbox validation</small></div>
+            </div>
+
+            <hr/>
+            {if condition="($user['email_status'] eq 0)"}
+            <div class="am-g" style="    margin-left: 34%;">
+                <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+                    <div style="  margin-left: 9%;">
+                        <img style="width: 10%; margin-left: 6%;}" src="__STATIC__/img/pencil.png" alt="">
+                        <div style=" margin-top: -8%;margin-left: 16%;">
+                            <p>我们检测到您的邮箱还未验证，请立即验证！<br></p>
+                            <p style="margin-top: -2%">We have detected that your mailbox has not been verified, please verify it immediately!</p>
+                        </div>
+
+                    </div>
+
+                    <div class="am-form am-form-horizontal" id="doc-vld-msg" style="margin-top: 4%;">
+                        <div class="am-form-group">
+                            <label for="email" class="am-u-sm-3 am-form-label" >您的邮箱 / Email</label>
+                            <div class="am-u-sm-9">
+                                <p style="margin-top: 1%;" id="email" value="{$user->email}">{$user->email}</p>
+                                <p id="user" style="display: none" value="{$user->user_name}">{$user->user_name}</p>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button id="send" onclick="Send(this)" class="am-btn am-btn-default">发送验证码</button>
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                                <label for="code" class="am-u-sm-3 am-form-label">验证码 / Code</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="code"  placeholder="输入您收到的验证码 / Code" >
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button id="submit" type="button" onclick="Check()" class="am-btn am-btn-primary">提 交</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {elseif condition="$user['email_status'] eq 1"/}
+            <div class="am-g" style="    margin-left: 34%;">
+                <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+                    <div style="  margin-left: 9%;">
+                        <img style="width: 10%; margin-left: 6%;}" src="__STATIC__/img/success.png" alt="">
+                        <div style=" margin-top: -8%;margin-left: 16%;">
+                            <p>您的邮箱{$user->email}已验证成功！<br></p>
+                            <p style="margin-top: -2%">Your mailbox Verified success!</p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            {/if}
+        </div>
+        <button
+                style="display: none"
+                id="alert"
+                type="button"
+                class="am-btn am-btn-primary"
+                data-am-modal="{target: '#my-alert'}">
+            Alert
+        </button>
+        <div class="am-modal am-modal-alert" id="my-alert">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd">We-Times提示</div>
+                <div class="am-modal-bd">
+                    验证成功!
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn">确定</span>
+                </div>
+            </div>
+        </div>
+        <footer class="admin-content-footer">
+            <hr>
+            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </footer>
+
+    </div>
+    <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__STATIC__/AmazeUI/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="__STATIC__/AmazeUI/assets/js/amazeui.min.js"></script>
+<script src="__STATIC__/AmazeUI/assets/js/app.js"></script>
+<script type="text/javascript">
+    $(document).ready(document.getElementById("submit").disabled = true);
+    function Send(val) {
+            var email = document.getElementById('email').innerHTML;
+            var user  = document.getElementById('user').innerHTML;
+        val.setAttribute("disabled", true);
+        document.getElementById('submit').disabled = false;
+        val.innerText="已发送";
+        var url = "http://localhost/We-Times/public/api/Emailcheck/EmailCheck?email="+email;
+        $.ajax({
+            type : 'post',
+            url : url,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 1){
+
+                }
+                else{
+                    alert('发送失败!');
+
+                }
+
+            },
+            error: function (data) {
+
+            }
+        });
+        }
+
+        function Check() {
+            var code = document.getElementById('code').value;
+            console.log(code);
+            var url = "http://localhost/We-Times/public/api/Emailcheck/EmailCheck2?code="+code;
+            $.ajax({
+                type : 'post',
+                url : url,
+                dataType: 'json',
+                success : function(data){
+                    if (data.status == 1){
+                        alert('验证成功!');
+                        window.location.reload();
+                    }
+                    else{
+                        alert('验证失败!验证码不合法');
+
+                    }
+
+                },
+                error: function (data) {
+
+                }
+            });
+        }
+</script>
+</body>
+</html>

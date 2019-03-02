@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 基础表格</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="__STATIC__/Hplus/favicon.ico"> <link href="__STATIC__/Hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+
+        <div class="col-sm-10">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>省/直辖市/自治区</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="btn-group hidden-xs" id="exampleToolbar">
+                        <button type="button" data-toggle="modal" href="#modal-form" class="btn btn-outline btn-default">
+                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" onclick="refresh()" class="btn btn-outline btn-default">
+                            <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名称</th>
+                            <th>英文名称</th>
+                            <th>创建时间</th>
+                            <th>创建者</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {volist name="list" id="vo"}
+                        <tr id="first" onclick="do_part({$vo.id})">
+                            <td>{$vo.id}</td>
+                            <td>{$vo.city_name}</td>
+                            <td>{$vo.e_name}</td>
+                            <td>{$vo.create_time}</td>
+                            <td>{$vo.create_admin}</td>
+                            <td>{$vo.status | cityStatus}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">操作 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="font-bold" onclick="status({$vo.id})">更改状态</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a onclick="deleteCity({$vo.id})">删除</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    <div class="col-sm-10">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>市(当前显示:<span id="sp1" style="color: #0d8ddb">--</span>)</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="btn-group hidden-xs" id="exampleToolbar1" >
+                    <button type="button" data-toggle="modal" href="#modal-form1" class="btn btn-outline btn-default">
+                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" onclick="refresh()" class="btn btn-outline btn-default">
+                        <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>名称</th>
+                        <th>英文名称</th>
+                        <th>创建时间</th>
+                        <th>创建者</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="tbody1">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<div id="modal-form" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>添加 <span style="color: #0d8ddb">省、直辖市、自治区</span></h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form  class="form-horizontal m-t" id="signupForm" method="post" action="{:url('Index/City')}" >
+                                    <input style="display:none" name="part" type="text" value="0">
+                                    <div class="form-group" >
+                                        <label class="col-sm-3 control-label">名称:</label>
+                                        <div class="col-sm-8">
+                                            <input id="city_name" name="city_name" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">英文名称:</label>
+                                        <div class="col-sm-8">
+                                            <input id="e_name" name="e_name" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-3">
+                                            <button class="btn btn-primary" type="submit">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="modal-form1" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>添加 <span style="color: #0d8ddb">市、区</span></h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form  class="form-horizontal m-t" id="signupForm1" method="post" action="{:url('Index/City')}" >
+                                    <input style="display:none" name="part" type="text" value="1">
+                                    <div class="form-group" >
+                                        <label class="col-sm-3 control-label">选择上级:</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control m-b" name="parent_id">
+                                                {volist name="list" id="vo"}
+                                                <option value="{$vo.id}">{$vo.city_name}</option>
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-sm-3 control-label">名称:</label>
+                                        <div class="col-sm-8">
+                                            <input id="city_name1" name="city_name1" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">英文名称:</label>
+                                        <div class="col-sm-8">
+                                            <input id="e_name1" name="e_name1" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-3">
+                                            <button class="btn btn-primary" type="submit">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="__STATIC__/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/Hplus/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__STATIC__/Hplus/js/content.min.js?v=1.0.0"></script>
+<script src="__STATIC__/Hplus/js/demo/peity-demo.min.js"></script>
+<script src="__STATIC__/Hplus/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="__STATIC__/Hplus/js/plugins/validate/messages_zh.min.js"></script>
+<script src="__STATIC__/Hplus/js/demo/form-validate-demo.min.js"></script>
+<script>
+function do_part(id){
+   var url = "http://localhost/We-Times/public/api/City/SearchChild?parent_id="+id;
+   var url1 = "http://localhost/We-Times/public/api/City/getParentNameById?parent_id="+id;
+        $.ajax({
+            type : 'post',
+            url : url1,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 1){
+                     $("#sp1").text(data.data);
+
+                }
+                else{
+
+                }
+
+            },
+            error: function (data) {
+                alert("没有数据");
+            }
+        });
+
+
+    $.ajax({
+        type : 'post',
+        url : url,
+        dataType: 'json',
+        success : function(data){
+            if (data.status == 1) {
+                var str ='';
+                for (var i =0; i<data.data.length; i++){
+                    str += "<tr><td>"+data.data[i].id+"</td>";
+                    str += "<td>"+data.data[i].city_name+"</td>";
+                    str += "<td>"+data.data[i].e_name+"</td>";
+                    str += "<td>"+data.data[i].create_time+"</td>";
+                    str += "<td>"+data.data[i].create_admin+"</td>";
+                    if (data.data[i].status == 1){
+                        str += "<td>"+"<span class='badge badge-primary'>已开通</span>"+"</td>";
+                    }
+                    else{
+                        str += "<td>"+"<span class='badge badge-warning'>未开通</span>"+"</td>";
+                    }
+
+                    str += "<td>"+"<div class=\"btn-group\">\n" +
+                        "    <button data-toggle=\"dropdown\" class=\"btn btn-primary dropdown-toggle\">操作 <span class=\"caret\"></span>\n" +
+                        "    </button>\n" +
+                        "    <ul class=\"dropdown-menu\">\n" +
+                        "        <li><a class=\"font-bold\" onclick=\"status("+data.data[i].id+")\">更改状态</a>\n" +
+                        "        </li>\n" +
+                        "        <li class=\"divider\"></li>\n" +
+                        "        <li><a onclick=\"deleteCity("+data.data[i].id+")\">删除</a>\n" +
+                        "        </li>\n" +
+                        "    </ul>\n" +
+                        "</div>"+"</td></tr>";
+                }
+                document.getElementById("tbody1").innerHTML=str;
+            }
+            else{
+                alert("没有数据");
+            }
+
+        },
+        error: function (data) {
+
+        }
+    });
+}
+</script>
+<script>
+    function status(id) {
+        var url2 = "http://localhost/We-Times/public/api/City/Change?id="+id;
+        $.ajax({
+            type : 'post',
+            url : url2,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 1){
+                    alert("修改成功");
+                    window.location.reload();
+                }
+                else{
+                    alert("修改失败");
+                }
+
+            },
+            error: function (data) {
+                alert("没有数据");
+            }
+        });
+    }
+
+    function refresh(){
+        window.location.reload();
+    }
+
+    function deleteCity(id) {
+        var url3 = "http://localhost/We-Times/public/api/City/Delete?id="+id;
+        var msg = "确定删除？";
+        if (confirm(msg)==true) {
+            $.ajax({
+                type : 'post',
+                url : url3,
+                dataType: 'json',
+                success : function(data){
+                    if (data.status == 1){
+                        alert("删除成功");
+                        window.location.reload();
+                    }
+                    else{
+                        alert("删除失败");
+                    }
+
+                },
+                error: function (data) {
+                    alert("没有数据");
+                }
+            });
+        }
+    }
+</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+</html>

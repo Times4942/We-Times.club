@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 基础表格</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="__STATIC__/Hplus/favicon.ico"> <link href="__STATIC__/Hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-6">
+            <button type="button" onclick="Invitation()" class="btn btn-w-m btn-primary" style="width: 180px; margin-bottom: 5px;">邀请新用户</button>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>我的邀请码</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>邀请码</th>
+                            <th>创建时间</th>
+                            <th> 状态</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+
+                            <td>{$vo.id}</td>
+                            <td>{$vo.Invitationcode}</td>
+                            <td>{$vo.creation_time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.status | status}</td>
+
+                        </tr>
+                        {/volist}
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script src="__STATIC__/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/Hplus/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__STATIC__/Hplus/js/content.min.js?v=1.0.0"></script>
+<script src="__STATIC__/Hplus/js/plugins/iCheck/icheck.min.js"></script>
+<script src="__STATIC__/Hplus/js/demo/peity-demo.min.js"></script>
+<script>
+    function Invitation() {
+        var generate = '1';
+        var url = "http://localhost/We-Times/public/api/Invitation/Invitation?generate="+generate;
+        $.ajax({
+            type : 'post',
+            url : url,
+            dataType: 'json',
+            success : function(data){
+                if (data.status == 1){
+                    alert("邀请码生成成功："+data.data);
+                    window.location.reload();
+                }
+                else{
+                    alert('生成出现错误');
+
+                }
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+</html>

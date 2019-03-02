@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 基础表格</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="__STATIC__/Hplus/favicon.ico"> <link href="__STATIC__/Hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/Hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>图片上传</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="ifm"  class="ibox-content">
+                <iframe style="width: 100%; height:500px; " src="Carousel_upload.html" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>图片状态</h5>
+
+                <!--<button style="width: 50px; height: auto;  margin-left: 30px;" type="button" class="btn btn-primary btn-sm">刷新</button>-->
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+                <div  class="ibox-content">
+                    <table  class="table table-hover">
+                        <thead>
+                        <tr >
+                            <div class="btn-group hidden-xs" id="exampleToolbar1" >
+                                <button type="button" onclick="refresh()" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <th>#</th>
+                            <th style="text-align: center;">图片</th>
+                            <th style="text-align: center;">上传时间</th>
+                            <th style="text-align: center;">上传者</th>
+                            <th>状态</th>
+                            <th style="text-align: center;">操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+                            <td style="text-align: center;">{$vo.id}</td>
+                            <td style="text-align: center;"><img style="width: 150px;height: 50px;" src="__STATIC__/upload/images/carousel/{$vo.save_name}"></td>
+                            <td style="text-align: center;">{$vo.upload_time|date="Y-m-d H:i:s",###}</td>
+                            <td style="text-align: center;">{$vo.upload_admin}</td>
+                            {if condition="$vo.status neq 0"}
+                            <td><div  class="switch">
+                                <div  class="onoffswitch">
+                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example{$vo.id}" onclick="Change({$vo.id})">
+                                    <label  class="onoffswitch-label" for="example{$vo.id}">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div></td>
+                            {else /}
+                            <td><div  class="switch">
+                                <div  class="onoffswitch">
+                                    <input type="checkbox"  class="onoffswitch-checkbox" id="example{$vo.id}" onclick="Change({$vo.id})">
+                                    <label  class="onoffswitch-label" for="example{$vo.id}">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div></td>
+                            {/if}
+                            <td style="text-align: center;"><button type="button" onclick="del({$vo.id})" class="btn btn-w-m btn-danger">删 除</button></td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+
+                    </table>
+                    {$list->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<script src="__STATIC__/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/Hplus/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="__STATIC__/Hplus/js/content.min.js?v=1.0.0"></script>
+<script src="__STATIC__/Hplus/js/plugins/iCheck/icheck.min.js"></script>
+<script src="__STATIC__/Hplus/js/demo/peity-demo.min.js"></script>
+<script>
+    $(document).ready(
+        document.getElementById("ifm").style.display = "none"
+    );
+
+    function open(){
+        document.getElementById("ifm").style.display = "block"
+    }
+    function refresh(){
+        window.location.reload();
+    }
+
+    function del(id){
+        var url = "http://localhost/We-Times/public/api/Carousel/Delete?id="+id;
+        var msg = "确定删除这张图？";
+        if (confirm(msg)==true){
+            $.ajax({
+                type : 'post',
+                url : url,
+                dataType: 'json',
+                success : function(data){
+                    if (data.status == 1){
+                        alert("删除成功");
+                        window.location.reload();
+                    }
+                    else{
+                        alert("删除失败");
+                    }
+
+                },
+                error: function (data) {
+
+                }
+            })
+        }else{
+            return false;
+        }
+
+    }
+
+    function Change(id) {
+        var url = "http://localhost/We-Times/public/api/Carousel/Change?id="+id;
+        $.ajax({
+            type : 'post',
+            url : url,
+            dataType: 'json',
+            success : function(data){
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
+</html>

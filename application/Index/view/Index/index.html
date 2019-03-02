@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>We-Times-您的社交助手</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate icon" type="image/png" href="__STATIC__/img/icon.png">
+    <link rel="stylesheet" href="__STATIC__/AmazeUI/assets/css/amazeui.min.css"/>
+
+    <style>
+        .get {
+            background: #1E5B94;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .get-title {
+            font-size: 200%;
+            border: 2px solid #fff;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .get-btn {
+            background: #fff;
+        }
+
+        .detail {
+            background: #fff;
+        }
+
+        .detail-h2 {
+            text-align: center;
+            font-size: 150%;
+            margin: 40px 0;
+        }
+
+        .detail-h3 {
+            color: #1f8dd6;
+        }
+
+        .detail-p {
+            color: #7f8c8d;
+        }
+
+        .detail-mb {
+            margin-bottom: 30px;
+        }
+
+        .hope {
+            background: #0bb59b;
+            padding: 50px 0;
+        }
+
+        .hope-img {
+            text-align: center;
+        }
+
+        .hope-hr {
+            border-color: #149C88;
+        }
+
+        .hope-title {
+            font-size: 140%;
+        }
+
+        .about {
+            background: #fff;
+            padding: 40px 0;
+            color: #7f8c8d;
+        }
+
+        .about-color {
+            color: #34495e;
+        }
+
+        .about-title {
+            font-size: 180%;
+            padding: 30px 0 50px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            margin: 0;
+            padding: 15px 0;
+            text-align: center;
+            background: #2d3e50;
+        }
+
+        .am-slider am-slider-default{
+            width: 59%;
+            left: 393px;
+            /* text-align: center; */
+            /* height: 31%; */
+        }
+        .am-selected-btn{
+            width:180%;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+{include file="public/header"}
+<div class="get" style="margin-bottom: -10%;">
+    <div class="am-slider am-slider-default"style="    top: -91px;
+    left: 23.5%;
+    width: 52.5%;
+">
+        <ul class="am-slides">
+            {volist name="carousels" id="vo"}
+            <li><img style="width: 1000px;height: 450px;"  src="__STATIC__/upload/images/carousel/{$vo.save_name}" alt=""></li>
+            {/volist}
+        </ul>
+    </div>
+</div>
+
+<div class="detail">
+    <div class="am-g am-container">
+        <div class="am-u-lg-12">
+            <h2 class="detail-h2">欢迎来到<span style="color: #0a6aa1;" >We-Times.club</span>， 一起聊聊感兴趣的!</h2>
+
+            <div class="am-g">
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+
+                    <h3 class="detail-h3">
+                        <i class="am-icon-mobile am-icon-sm"></i>
+                        同城约见
+                    </h3>
+
+                    <p class="detail-p">
+                        自选地点，精确定位，保证帮您约到想见的人，去想去的地方！
+                    </p>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-cogs am-icon-safari"></i>
+                        话题广场
+                    </h3>
+
+                    <p class="detail-p">
+                       We-Times.club的话题广场可以让您想说的话分享给大多数人！点赞、评论，认识更多有趣的人！
+                    </p>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-check-square-o am-icon-sm"></i>
+                        聊吧
+                    </h3>
+
+                    <p class="detail-p">
+                        自定义昵称，自选房间，实时语音、视频、文字聊天，别害羞！一起来试试!
+                    </p>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-send-o am-icon-sm"></i>
+                        留言板
+                    </h3>
+
+                    <p class="detail-p">
+                       将想留的话偷偷放在这里
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="about">
+    <div class="am-g am-container">
+        <div class="am-u-lg-12">
+            <h2 class="about-title about-color">话题广场-<span style="color: #0a6aa1">精选话题</span></h2>
+
+
+        </div>
+    </div>
+</div>
+{include file="public/city"}
+{include file="public/footer"}
+
+<script src="__STATIC__/AmazeUI/assets/js/jquery-3.3.1.js"></script>
+<script src="__STATIC__/AmazeUI/assets/js/amazeui.js"></script>
+<script src="__STATIC__/AmazeUI/assets/js/app.js"></script>
+
+<script>
+    $('.am-slider').flexslider({
+        playAfterPaused: 8000,
+        before: function(slider) {
+            if (slider._pausedTimer) {
+                window.clearTimeout(slider._pausedTimer);
+                slider._pausedTimer = null;
+            }
+        },
+        after: function(slider) {
+            var pauseTime = slider.vars.playAfterPaused;
+            if (pauseTime && !isNaN(pauseTime) && !slider.playing) {
+                if (!slider.manualPause && !slider.manualPlay && !slider.stopped) {
+                    slider._pausedTimer = window.setTimeout(function() {
+                        slider.play();
+                    }, pauseTime);
+                }
+            }
+        },
+        pauseOnHover: true,
+        animationLoop: true,
+        smoothHeight: false,
+        slideshowSpeed: 4500,
+    });
+</script>
+</body>
+</html>
